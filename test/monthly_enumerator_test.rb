@@ -92,8 +92,6 @@ class MonthlyEnumeratorTest < ActiveSupport::TestCase
       )
       enumerator = @schedule.enumerator.new(@schedule, date)
       assert_equal Date.new(2015, 1, 25), enumerator.next
-      assert_equal Date.new(2015, 2, 22), enumerator.next
-      assert_equal Date.new(2015, 3, 29), enumerator.next
     end
 
     should "return the last monday of the month" do
@@ -103,9 +101,7 @@ class MonthlyEnumeratorTest < ActiveSupport::TestCase
         monthly_pattern: [[-1, "Monday"]],
         start_date: date
       )
-      enumerator = @schedule.enumerator.new(@schedule, date)
-      assert_equal Date.new(2015, 1, 26), enumerator.next
-      assert_equal Date.new(2015, 2, 23), enumerator.next
+      enumerator = @schedule.enumerator.new(@schedule, Date.new(2015, 2, 28))
       assert_equal Date.new(2015, 3, 30), enumerator.next
     end
 
@@ -116,10 +112,8 @@ class MonthlyEnumeratorTest < ActiveSupport::TestCase
         monthly_pattern: [[-1, "Tuesday"]],
         start_date: date
       )
-      enumerator = @schedule.enumerator.new(@schedule, date)
-      assert_equal Date.new(2015, 1, 27), enumerator.next
+      enumerator = @schedule.enumerator.new(@schedule, Date.new(2015, 1, 31))
       assert_equal Date.new(2015, 2, 24), enumerator.next
-      assert_equal Date.new(2015, 3, 31), enumerator.next
     end
 
     should "return the second to last tuesday of the month" do
@@ -129,10 +123,8 @@ class MonthlyEnumeratorTest < ActiveSupport::TestCase
         monthly_pattern: [[-2, "Tuesday"]],
         start_date: date
       )
-      enumerator = @schedule.enumerator.new(@schedule, date)
-      assert_equal Date.new(2015, 1, 20), enumerator.next
-      assert_equal Date.new(2015, 2, 17), enumerator.next
-      assert_equal Date.new(2015, 3, 24), enumerator.next
+      enumerator = @schedule.enumerator.new(@schedule, Date.new(2015, 2, 28))
+      assert_equal Date.new(2015, 2, 17), enumerator.prev
     end
   end
 
